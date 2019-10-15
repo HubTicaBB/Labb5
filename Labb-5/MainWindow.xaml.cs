@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -83,23 +82,26 @@ namespace Labb_5
             deleteUserButton.IsEnabled = false;
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
-
             if (nameBox.Text != "" && emailBox.Text != "")
-            {                
+            {
                 EnterNewUserData();
-            }            
+                nameBox.ToolTip = null;
+                emailBox.ToolTip = null;
+                userListBox.SelectedItem = null;
+            }
+
         }
 
         private void EnterNewUserData()
-        {            
+        {
             foreach (var item in userList)
             {
                 if (item == userListBox.SelectedItem)
                 {
-                    item.Name = nameBox.Text;                    
+                    item.Name = nameBox.Text;
                     item.Email = emailBox.Text;
                     nameBox.Text = "";
-                    emailBox.Text = "";                    
+                    emailBox.Text = "";
                     userListBox.ItemsSource = userList;
                     userListBox.Items.Refresh();
                 }
