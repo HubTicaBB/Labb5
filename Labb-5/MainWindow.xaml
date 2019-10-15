@@ -23,12 +23,12 @@
             <Label Content="User Info:" Grid.Column="2" HorizontalAlignment="Left" Margin="574,66,0,0" VerticalAlignment="Top" Width="141" FontSize="20" FontWeight="Bold"/>
             <ListBox x:Name="userListBox" Grid.Column="2" HorizontalAlignment="Left" Height="150" Margin="300,102,0,0" VerticalAlignment="Top" Width="132"/>
             <ListBox x:Name="adminListBox" Grid.Column="2" HorizontalAlignment="Left" Height="150" Margin="437,102,0,0" VerticalAlignment="Top" Width="132"/>
-            <Button x:Name="addUserButton" Grid.ColumnSpan="2" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="0.5,255,0,0" VerticalAlignment="Top" Width="62"/>
-            <Button x:Name="editUserButton" Content="Edit" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="51,255,0,0" VerticalAlignment="Top" Width="62"/>
-            <Button x:Name="deleteUserButton" Content="Delete" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="134,255,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="1.508,0.534"/>
-            <RadioButton x:Name="userToAdminRadioButton" Content="User to Admin" Grid.Column="2" HorizontalAlignment="Left" Margin="318,284,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="adminToUserRadioButton" Content="Admin to User" Grid.Column="2" HorizontalAlignment="Left" Margin="318,312,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="changeStatusButton" Content="Change Status" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="318,351,0,0" VerticalAlignment="Top" Width="96" RenderTransformOrigin="1.508,0.534"/>
+            <Button x:Name="addUserButton" Grid.ColumnSpan="2" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="0.5,255,0,0" VerticalAlignment="Top" Width="62" IsEnabled="False"/>
+            <Button x:Name="editUserButton" Content="Edit" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="51,255,0,0" VerticalAlignment="Top" Width="62" IsEnabled="False"/>
+            <Button x:Name="deleteUserButton" Content="Delete" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="134,255,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="1.508,0.534" IsEnabled="False"/>
+            <RadioButton x:Name="userToAdminRadioButton" Content="User to Admin" Grid.Column="2" HorizontalAlignment="Left" Margin="318,284,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+            <RadioButton x:Name="adminToUserRadioButton" Content="Admin to User" Grid.Column="2" HorizontalAlignment="Left" Margin="318,312,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+            <Button x:Name="changeStatusButton" Content="Change Status" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="318,351,0,0" VerticalAlignment="Top" Width="96" RenderTransformOrigin="1.508,0.534" IsEnabled="False"/>
 
         </Grid>
 
