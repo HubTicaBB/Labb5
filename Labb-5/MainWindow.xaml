@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_5"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="User Database" Height="450" Width="892.5">
     <Grid>
-        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48*"/>
+                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="718*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Name" HorizontalAlignment="Left" Margin="0,107,0,0" VerticalAlignment="Top" Width="44" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="E-Mail" HorizontalAlignment="Left" Margin="0,139,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="23" Margin="20,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="2"/>
+            <TextBox x:Name="emailBox" HorizontalAlignment="Left" Height="23" Margin="20,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="2"/>
+            <Label Content="User List:" Grid.Column="2" HorizontalAlignment="Left" Margin="300,66,0,0" VerticalAlignment="Top" Width="132" FontSize="20" FontWeight="Bold"/>
+            <Label Content="Admin List:" Grid.Column="2" HorizontalAlignment="Left" Margin="437,66,0,0" VerticalAlignment="Top" Width="141" FontSize="20" FontWeight="Bold"/>
+            <Label x:Name="userInfoLabel" Content="" Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="574,102,0,0" VerticalAlignment="Top" Width="186" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"/>
+            <Label Content="User Info:" Grid.Column="2" HorizontalAlignment="Left" Margin="574,66,0,0" VerticalAlignment="Top" Width="141" FontSize="20" FontWeight="Bold"/>
+            <ListBox x:Name="userListBox" Grid.Column="2" HorizontalAlignment="Left" Height="150" Margin="300,102,0,0" VerticalAlignment="Top" Width="132"/>
+            <ListBox x:Name="adminListBox" Grid.Column="2" HorizontalAlignment="Left" Height="150" Margin="437,102,0,0" VerticalAlignment="Top" Width="132"/>
+            <Button x:Name="addUserButton" Grid.ColumnSpan="2" Content="Save" Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="0.5,255,0,0" VerticalAlignment="Top" Width="62"/>
+            <Button x:Name="editUserButton" Content="Edit" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="51,255,0,0" VerticalAlignment="Top" Width="62"/>
+            <Button x:Name="deleteUserButton" Content="Delete" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="134,255,0,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="1.508,0.534"/>
+            <RadioButton x:Name="userToAdminRadioButton" Content="User to Admin" Grid.Column="2" HorizontalAlignment="Left" Margin="318,284,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="adminToUserRadioButton" Content="Admin to User" Grid.Column="2" HorizontalAlignment="Left" Margin="318,312,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="changeStatusButton" Content="Change Status" Grid.Column="2" HorizontalAlignment="Left" Height="29" Margin="318,351,0,0" VerticalAlignment="Top" Width="96" RenderTransformOrigin="1.508,0.534"/>
+
+        </Grid>
+
     </Grid>
 </Window>
