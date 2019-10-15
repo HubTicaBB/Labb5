@@ -88,6 +88,7 @@ namespace Labb_5
                 nameBox.ToolTip = null;
                 emailBox.ToolTip = null;
                 userListBox.SelectedItem = null;
+                userInfoLabel.Content = null;
             }
 
         }
@@ -102,6 +103,20 @@ namespace Labb_5
                     item.Email = emailBox.Text;
                     nameBox.Text = "";
                     emailBox.Text = "";
+                    userListBox.ItemsSource = userList;
+                    userListBox.Items.Refresh();
+                }
+            }
+        }
+
+        private void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < userList.Count; i++)
+            {
+                if (userList[i] == userListBox.SelectedItem)
+                {
+                    userList.Remove(userList[i]);
+                    userInfoLabel.Content = null;
                     userListBox.ItemsSource = userList;
                     userListBox.Items.Refresh();
                 }
