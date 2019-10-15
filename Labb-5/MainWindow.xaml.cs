@@ -40,6 +40,9 @@ namespace Labb_5
             userList.Add(user);
             userListBox.ItemsSource = userList;
             userListBox.Items.Refresh();
+            nameBox.Text = "";
+            emailBox.Text = "";
+
         }
 
     }
