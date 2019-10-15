@@ -10,6 +10,8 @@ namespace Labb_5
     public partial class MainWindow : Window
     {
         static List<User> userList = new List<User>();
+        static List<User> adminList = new List<User>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -17,7 +19,7 @@ namespace Labb_5
 
         private void EnableAddButton()
         {
-            addUserButton.IsEnabled = (nameBox.Text != "" && emailBox.Text != "");
+            addUserButton.IsEnabled = (nameBox.Text != "" && emailBox.Text != "" && userListBox.SelectedItem == null);
         }
 
         private void EnableChangeButton()
@@ -30,7 +32,22 @@ namespace Labb_5
             deleteUserButton.IsEnabled = userListBox.SelectedItem != null;
         }
 
+        private void EnableChangeStatusButton()
+        {
+            changeStatusButton.IsEnabled = userListBox.SelectedItem != null;
+        }
+
         private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableAddOrChangeButton();
+        }
+
+        private void emailBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableAddOrChangeButton();
+        }
+
+        private void EnableAddOrChangeButton()
         {
             if (userListBox.SelectedItem == null)
             {
@@ -42,32 +59,31 @@ namespace Labb_5
             }
         }
 
-        private void emailBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void RefreshUserListBox()
         {
-            if (userListBox.SelectedItem == null)
-            {
-                EnableAddButton();
-            }
-            else
-            {
-                EnableChangeButton();
-            }
+            userListBox.ItemsSource = userList;
+            userListBox.Items.Refresh();
+        }
+
+        private void ClearTextBoxes()
+        {
+            nameBox.Text = "";
+            emailBox.Text = "";
         }
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
             User user = new User(nameBox.Text, emailBox.Text);
             userList.Add(user);
-            userListBox.ItemsSource = userList;
-            userListBox.Items.Refresh();
-            nameBox.Text = "";
-            emailBox.Text = "";
+            ClearTextBoxes();
+            RefreshUserListBox();            
         }
 
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EnableChangeButton();
             EnableDeleteButton();
+            EnableChangeStatusButton();
             foreach (var item in userList)
             {
                 if (item == userListBox.SelectedItem)
@@ -80,6 +96,7 @@ namespace Labb_5
         private void changeUserButton_Click(object sender, RoutedEventArgs e)
         {
             deleteUserButton.IsEnabled = false;
+            changeStatusButton.IsEnabled = false;
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
             if (nameBox.Text != "" && emailBox.Text != "")
@@ -90,7 +107,6 @@ namespace Labb_5
                 userListBox.SelectedItem = null;
                 userInfoLabel.Content = null;
             }
-
         }
 
         private void EnterNewUserData()
@@ -101,10 +117,8 @@ namespace Labb_5
                 {
                     item.Name = nameBox.Text;
                     item.Email = emailBox.Text;
-                    nameBox.Text = "";
-                    emailBox.Text = "";
-                    userListBox.ItemsSource = userList;
-                    userListBox.Items.Refresh();
+                    ClearTextBoxes();
+                    RefreshUserListBox();
                 }
             }
         }
@@ -117,8 +131,7 @@ namespace Labb_5
                 {
                     userList.Remove(userList[i]);
                     userInfoLabel.Content = null;
-                    userListBox.ItemsSource = userList;
-                    userListBox.Items.Refresh();
+                    RefreshUserListBox();
                 }
             }
         }
