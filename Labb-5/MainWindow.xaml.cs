@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Labb_5
 {
@@ -20,9 +9,12 @@ namespace Labb_5
     /// </summary>
     public partial class MainWindow : Window
     {
+        static List<User> userList = new List<User>();
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+
         }
 
         private void EnableButtons()
@@ -41,5 +33,14 @@ namespace Labb_5
         {
             EnableButtons();
         }
+
+        private void addUserButton_Click(object sender, RoutedEventArgs e)
+        {
+            User user = new User(nameBox.Text, emailBox.Text);
+            userList.Add(user);
+            userListBox.ItemsSource = userList;
+            userListBox.Items.Refresh();
+        }
+
     }
 }

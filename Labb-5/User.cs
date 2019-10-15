@@ -9,5 +9,9 @@
             Name = name;
             Email = email;
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
