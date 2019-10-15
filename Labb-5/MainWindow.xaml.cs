@@ -10,6 +10,7 @@ namespace Labb_5
     public partial class MainWindow : Window
     {
         static List<User> userList = new List<User>();
+        static List<User> adminList = new List<User>();
         public MainWindow()
         {
             InitializeComponent();
@@ -28,6 +29,15 @@ namespace Labb_5
         private void EnableDeleteButton()
         {
             deleteUserButton.IsEnabled = userListBox.SelectedItem != null;
+        }
+
+        private void EnableMoveUserToAdminButton()
+        {
+            moveUserToAdmin.IsEnabled = userListBox.SelectedItem != null;
+        }
+        private void EnableMoveAdminToUserButton()
+        {
+            moveAdminToUser.IsEnabled = adminListBox.SelectedItem != null;
         }
 
         private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -68,6 +78,9 @@ namespace Labb_5
         {
             EnableChangeButton();
             EnableDeleteButton();
+            EnableMoveUserToAdminButton();
+
+
             foreach (var item in userList)
             {
                 if (item == userListBox.SelectedItem)
@@ -79,6 +92,7 @@ namespace Labb_5
 
         private void changeUserButton_Click(object sender, RoutedEventArgs e)
         {
+
             deleteUserButton.IsEnabled = false;
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
@@ -92,7 +106,6 @@ namespace Labb_5
             }
 
         }
-
         private void EnterNewUserData()
         {
             foreach (var item in userList)
@@ -121,6 +134,53 @@ namespace Labb_5
                     userListBox.Items.Refresh();
                 }
             }
+        }
+
+        private void moveUserToAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < userList.Count; i++)
+            {
+                if (userList[i] == userListBox.SelectedItem)
+                {
+                    adminList.Add(userList[i]);
+                    adminListBox.ItemsSource = adminList;
+                    userList.RemoveAt(i);
+                    moveAdminToUser.IsEnabled = false;
+                    moveUserToAdmin.IsEnabled = false;
+                    userListBox.Items.Refresh();
+                    adminListBox.Items.Refresh();
+                }
+            }
+        }
+
+        private void adminListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EnableMoveAdminToUserButton();
+            foreach (var user in adminList)
+            {
+                if (user == adminListBox.SelectedItem)
+                {
+                    userInfoLabel.Content = $"User name\t {user.Name,30}\nE-Mail\t\t {user.Email,30}";
+                }
+            }
+        }
+
+        private void moveAdminToUser_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < adminList.Count; i++)
+            {
+                if (adminList[i] == adminListBox.SelectedItem)
+                {
+                    userList.Add(adminList[i]);
+                    userListBox.ItemsSource = userList;
+                    adminList.RemoveAt(i);
+                    moveAdminToUser.IsEnabled = false;
+                    moveUserToAdmin.IsEnabled = false;
+                    userListBox.Items.Refresh();
+                    adminListBox.Items.Refresh();
+                }
+            }
+
         }
     }
 }
