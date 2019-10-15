@@ -22,7 +22,24 @@ namespace Labb_5
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
+        }
+
+        private void EnableButtons()
+        {
+            addUserButton.IsEnabled = (nameBox.Text != "" && emailBox.Text != "");
+            editUserButton.IsEnabled = (nameBox.Text != "" && emailBox.Text != "");
+            deleteUserButton.IsEnabled = (nameBox.Text != "" && emailBox.Text != "");
+        }
+
+        private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableButtons();
+        }
+
+        private void emailBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnableButtons();
         }
     }
 }

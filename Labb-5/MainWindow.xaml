@@ -15,8 +15,8 @@
             </Grid.ColumnDefinitions>
             <Label Content="Name" HorizontalAlignment="Left" Margin="0,107,0,0" VerticalAlignment="Top" Width="44" Grid.Column="1" Grid.ColumnSpan="2"/>
             <Label Content="E-Mail" HorizontalAlignment="Left" Margin="0,139,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="23" Margin="20,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="2"/>
-            <TextBox x:Name="emailBox" HorizontalAlignment="Left" Height="23" Margin="20,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="2"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="23" Margin="20,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="2" TextChanged="nameBox_TextChanged"/>
+            <TextBox x:Name="emailBox" HorizontalAlignment="Left" Height="23" Margin="20,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="2" TextChanged="emailBox_TextChanged"/>
             <Label Content="User List:" Grid.Column="2" HorizontalAlignment="Left" Margin="300,66,0,0" VerticalAlignment="Top" Width="132" FontSize="20" FontWeight="Bold"/>
             <Label Content="Admin List:" Grid.Column="2" HorizontalAlignment="Left" Margin="437,66,0,0" VerticalAlignment="Top" Width="141" FontSize="20" FontWeight="Bold"/>
             <Label x:Name="userInfoLabel" Content="" Grid.Column="2" HorizontalAlignment="Left" Height="66" Margin="574,102,0,0" VerticalAlignment="Top" Width="186" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"/>
