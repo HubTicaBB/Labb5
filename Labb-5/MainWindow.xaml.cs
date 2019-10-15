@@ -45,5 +45,15 @@ namespace Labb_5
 
         }
 
+        private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (var item in userList)
+            {
+                if (item == userListBox.SelectedItem)
+                {
+                    userInfoLabel.Content = $"User name\t {item.Name,30}\nE-Mail\t\t {item.Email,30}";
+                }
+            }
+        }
     }
 }
