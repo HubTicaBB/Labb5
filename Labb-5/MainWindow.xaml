@@ -15,8 +15,8 @@
                 <ColumnDefinition Width="824*"/>
                 <ColumnDefinition Width="36*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Name" HorizontalAlignment="Left" Margin="0,107,0,0" VerticalAlignment="Top" Width="44" Grid.Column="2" Grid.ColumnSpan="2" Height="26"/>
-            <Label Content="E-Mail" HorizontalAlignment="Left" Margin="0,139,0,0" VerticalAlignment="Top" Grid.Column="2" Grid.ColumnSpan="2" Height="26" Width="43"/>
+            <Label x:Name="nameLabel" Content="          Name" HorizontalAlignment="Left" Margin="10,107,0,0" VerticalAlignment="Top" Width="76" Grid.Column="1" Grid.ColumnSpan="3" Height="26"/>
+            <Label x:Name="eMailLabel" Content="         E-Mail" HorizontalAlignment="Left" Margin="10,139,0,0" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="3" Height="26" Width="75"/>
             <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="23" Margin="20,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="3" TextChanged="nameBox_TextChanged"/>
             <TextBox x:Name="emailBox" HorizontalAlignment="Left" Height="23" Margin="20,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Column="3" TextChanged="emailBox_TextChanged"/>
             <Label Content="User List:" Grid.Column="3" HorizontalAlignment="Left" Margin="300,66,0,0" VerticalAlignment="Top" Width="132" FontSize="20" FontWeight="Bold" Height="36" ToolTip="Click on user name to see complete information" ToolTipService.Placement="Top"/>

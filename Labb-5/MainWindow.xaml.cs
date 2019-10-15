@@ -94,6 +94,9 @@ namespace Labb_5
         {
 
             deleteUserButton.IsEnabled = false;
+            nameLabel.Content = "New Name";
+            eMailLabel.Content = "New E-mail";
+
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
             if (nameBox.Text != "" && emailBox.Text != "")
@@ -103,7 +106,10 @@ namespace Labb_5
                 emailBox.ToolTip = null;
                 userListBox.SelectedItem = null;
                 userInfoLabel.Content = null;
+                nameLabel.Content = "    Name";
+                eMailLabel.Content = "  E-mail";
             }
+
 
         }
         private void EnterNewUserData()
