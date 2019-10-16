@@ -148,7 +148,8 @@ namespace Labb_5
             emailBox.ToolTip = "Enter new email";
             if (nameBox.Text != "" && emailBox.Text != "")
             {
-                MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change {userListBox.SelectedItem}'s user information?\n\n",
+                MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change the following user in the User List ?\n\n" +
+                            $"{userInfoLabel.Content}",
                            "Change User Information",
                            MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (answer == MessageBoxResult.Yes) EnterNewUserData();
@@ -181,14 +182,21 @@ namespace Labb_5
 
         private void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < userList.Count; i++)
+            MessageBoxResult answer = MessageBox.Show($"Are you sure you want to delete the following user from  the User List?\n\n" +
+              $"{userInfoLabel.Content}",
+              "Delete user",
+              MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
             {
-                if (userList[i] == userListBox.SelectedItem)
+                for (int i = 0; i < userList.Count; i++)
                 {
-                    userList.Remove(userList[i]);
-                    userInfoLabel.Content = null;
-                    userListBox.ItemsSource = userList;
-                    userListBox.Items.Refresh();
+                    if (userList[i] == userListBox.SelectedItem)
+                    {
+                        userList.Remove(userList[i]);
+                        userInfoLabel.Content = null;
+                        userListBox.ItemsSource = userList;
+                        userListBox.Items.Refresh();
+                    }
                 }
             }
         }
