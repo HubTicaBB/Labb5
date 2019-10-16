@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -126,7 +127,7 @@ namespace Labb_5
             EnableChangeButton();
             EnableDeleteButton();
             EnableMoveUserToAdminButton();
-
+            addUserButton.IsEnabled = true;
 
             foreach (var item in userList)
             {
@@ -141,6 +142,7 @@ namespace Labb_5
         {
             deleteUserButton.IsEnabled = false;
             moveUserToAdmin.IsEnabled = false;
+            addUserButton.IsEnabled = false;
             nameLabel.Content = "New Name";
             eMailLabel.Content = "New E-mail";
 
@@ -203,13 +205,18 @@ namespace Labb_5
 
         private void moveUserToAdmin_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < userList.Count; i++)
+            MoveToTheOtherList(userListBox.SelectedItem, userList, adminList, adminListBox);            
+        }
+
+        private void MoveToTheOtherList(Object user, List<User> currentList, List<User> newList, ListBox newListBox)
+        {
+            for (int i = 0; i < currentList.Count; i++)
             {
-                if (userList[i] == userListBox.SelectedItem)
+                if (currentList[i] == user)
                 {
-                    adminList.Add(userList[i]);
-                    adminListBox.ItemsSource = adminList;
-                    userList.RemoveAt(i);
+                    newList.Add(currentList[i]);
+                    newListBox.ItemsSource = newList;
+                    currentList.RemoveAt(i);
                     moveAdminToUser.IsEnabled = false;
                     moveUserToAdmin.IsEnabled = false;
                     userListBox.Items.Refresh();
@@ -232,20 +239,7 @@ namespace Labb_5
 
         private void moveAdminToUser_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < adminList.Count; i++)
-            {
-                if (adminList[i] == adminListBox.SelectedItem)
-                {
-                    userList.Add(adminList[i]);
-                    userListBox.ItemsSource = userList;
-                    adminList.RemoveAt(i);
-                    moveAdminToUser.IsEnabled = false;
-                    moveUserToAdmin.IsEnabled = false;
-                    userListBox.Items.Refresh();
-                    adminListBox.Items.Refresh();
-                }
-            }
-
+            MoveToTheOtherList(adminListBox.SelectedItem, adminList, userList, userListBox);
         }
     }
 }
