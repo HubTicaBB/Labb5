@@ -100,10 +100,30 @@ namespace Labb_5
                 return false;
             }
         }
+
+        private bool EmailIsUnique()
+        {
+            List<User> allUsers = new List<User>();
+            allUsers.AddRange(userList);
+            allUsers.AddRange(adminList);
+            
+            foreach (var user in allUsers)
+            {
+                if (user.Email == emailBox.Text)
+                {
+                    MessageBox.Show($"E-Mail address \"{emailBox.Text}\" already registered.\nChoose another E-Mail address.", "E-Mail already in use",
+                                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    emailBox.Text = "";
+                    emailBox.Focus();
+                    return false;
+                }
+            }           
+            return true;
+        }
+
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (NameIsValid() && EmailIsValid())
+            if (NameIsValid() && EmailIsValid() && EmailIsUnique())
             {
                 MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
                            $"    {"Name: ",-10}{nameBox.Text}\n" +
