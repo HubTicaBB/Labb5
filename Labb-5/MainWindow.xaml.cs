@@ -101,8 +101,7 @@ namespace Labb_5
         }
 
         private void changeUserButton_Click(object sender, RoutedEventArgs e)
-        {
-
+        {           
             deleteUserButton.IsEnabled = false;
             nameLabel.Content = "New Name";
             eMailLabel.Content = "New E-mail";
@@ -111,17 +110,21 @@ namespace Labb_5
             emailBox.ToolTip = "Enter new email";
             if (nameBox.Text != "" && emailBox.Text != "")
             {
-                EnterNewUserData();
+                MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change {userListBox.SelectedItem}'s user information?\n\n",
+                           "Change User Information",
+                           MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (answer == MessageBoxResult.Yes) EnterNewUserData();
                 nameBox.ToolTip = null;
                 emailBox.ToolTip = null;
                 userListBox.SelectedItem = null;
                 userInfoLabel.Content = null;
                 nameLabel.Content = "    Name";
                 eMailLabel.Content = "  E-mail";
+                nameBox.Text = "";
+                emailBox.Text = "";
             }
-
-
         }
+
         private void EnterNewUserData()
         {
             foreach (var item in userList)
