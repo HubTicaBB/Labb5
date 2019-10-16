@@ -66,9 +66,9 @@ namespace Labb_5
             }
         }
 
-        private bool NameIsValid()
+        private bool IsNameValid(string text)
         {
-            if (Regex.IsMatch(nameBox.Text, @"^([a-zA-ZÄäÖöÅå]{1,}\s[a-zA-zÄäÖöÅå]{1,}'?-?[a-zA-ZÄäÖöÅå]{1,}\s?([a-zA-ZÄäÖöÅå]{1,})?)"))
+            if (Regex.IsMatch(text, @"^([a-zA-ZÄäÖöÅå]{1,}\s[a-zA-zÄäÖöÅå]{1,}'?-?[a-zA-ZÄäÖöÅå]{1,}\s?([a-zA-ZÄäÖöÅå]{1,})?)"))
             {
                 return true;
             }
@@ -83,10 +83,9 @@ namespace Labb_5
             }
         }
 
-
-        private bool EmailIsValid()
+        private bool IsStringValidEmail(string text)
         {
-            if (Regex.IsMatch(emailBox.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"))
+            if (Regex.IsMatch(text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"))
             {
                 return true;
             }
@@ -123,7 +122,7 @@ namespace Labb_5
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NameIsValid() && EmailIsValid() && EmailIsUnique())
+            if (IsNameValid(nameBox.Text) && IsStringValidEmail(emailBox.Text) && EmailIsUnique())
             {
                 MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
                            $"    {"Name: ",-10}{nameBox.Text}\n" +
@@ -169,7 +168,7 @@ namespace Labb_5
             eMailLabel.Content = "New E-mail";
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
-            if (nameBox.Text != "" && emailBox.Text != "")
+            if (nameBox.Text != "" && emailBox.Text != "" && IsStringValidEmail(emailBox.Text) && IsNameValid(nameBox.Text))
             {
                 MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change the following user?\n\n" +
                             $"{userInfoLabel.Content}",
