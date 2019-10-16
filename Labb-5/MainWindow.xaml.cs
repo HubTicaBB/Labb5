@@ -164,7 +164,7 @@ namespace Labb_5
             moveAdminToUser.IsEnabled = false;
             addUserButton.IsEnabled = false;
 
-            nameLabel.Content = "New Name";
+            nameLabel.Content = "New First and Last Name";
             eMailLabel.Content = "New E-mail";
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
