@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -66,10 +68,18 @@ namespace Labb_5
 
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            User user = new User(nameBox.Text, emailBox.Text);
-            userList.Add(user);
-            userListBox.ItemsSource = userList;
-            userListBox.Items.Refresh();
+            MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
+                            $"    {"Name: ",-10}{nameBox.Text}\n" +
+                            $"    {"E-Mail: ",-10}  {emailBox.Text}\n",
+                            "Add New User",
+                            MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
+            {
+                User user = new User(nameBox.Text, emailBox.Text);
+                userList.Add(user);
+                userListBox.ItemsSource = userList;
+                userListBox.Items.Refresh();               
+            }
             nameBox.Text = "";
             emailBox.Text = "";
         }
