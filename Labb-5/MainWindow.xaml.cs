@@ -25,7 +25,7 @@ namespace Labb_5
 
         private void EnableChangeButton()
         {
-            changeUserButton.IsEnabled = userListBox.SelectedItem != null;
+            changeUserButton.IsEnabled = userListBox.SelectedItem != null || adminListBox.SelectedItem != null; /////
         }
 
         private void EnableDeleteButton()
@@ -44,7 +44,7 @@ namespace Labb_5
 
         private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (userListBox.SelectedItem == null)
+            if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null) /////
             {
                 EnableAddButton();
             }
@@ -56,7 +56,7 @@ namespace Labb_5
 
         private void emailBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (userListBox.SelectedItem == null)
+            if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null) //////
             {
                 EnableAddButton();
             }
@@ -106,7 +106,7 @@ namespace Labb_5
             List<User> allUsers = new List<User>();
             allUsers.AddRange(userList);
             allUsers.AddRange(adminList);
-            
+
             foreach (var user in allUsers)
             {
                 if (user.Email == emailBox.Text)
@@ -117,7 +117,7 @@ namespace Labb_5
                     emailBox.Focus();
                     return false;
                 }
-            }           
+            }
             return true;
         }
 
@@ -162,22 +162,34 @@ namespace Labb_5
         {
             deleteUserButton.IsEnabled = false;
             moveUserToAdmin.IsEnabled = false;
+            moveAdminToUser.IsEnabled = false;
             addUserButton.IsEnabled = false;
+
             nameLabel.Content = "New Name";
             eMailLabel.Content = "New E-mail";
-
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
             if (nameBox.Text != "" && emailBox.Text != "")
             {
-                MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change the following user in the User List ?\n\n" +
+                MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change the following user?\n\n" +
                             $"{userInfoLabel.Content}",
                            "Change User Information",
                            MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (answer == MessageBoxResult.Yes) EnterNewUserData();
+                if (answer == MessageBoxResult.Yes)
+                    if (userListBox.SelectedItem != null)
+                    {
+                        EnterNewUserData(userList, userListBox);
+
+                    }
+                    else if (adminListBox.SelectedItem != null)
+                    {
+                        EnterNewUserData(adminList, adminListBox);
+
+                    }
                 nameBox.ToolTip = null;
                 emailBox.ToolTip = null;
                 userListBox.SelectedItem = null;
+                adminListBox.SelectedItem = null;
                 userInfoLabel.Content = null;
                 nameLabel.Content = "    Name";
                 eMailLabel.Content = "  E-mail";
@@ -186,18 +198,19 @@ namespace Labb_5
             }
         }
 
-        private void EnterNewUserData()
+        private void EnterNewUserData(List<User> list, ListBox listBox)
         {
-            foreach (var item in userList)
+
+            foreach (var item in list)
             {
-                if (item == userListBox.SelectedItem)
+                if (item == listBox.SelectedItem)
                 {
                     item.Name = nameBox.Text;
                     item.Email = emailBox.Text;
                     nameBox.Text = "";
                     emailBox.Text = "";
-                    userListBox.ItemsSource = userList;
-                    userListBox.Items.Refresh();
+                    listBox.ItemsSource = list;
+                    listBox.Items.Refresh();
                 }
             }
         }
@@ -237,7 +250,7 @@ namespace Labb_5
 
         private void moveUserToAdmin_Click(object sender, RoutedEventArgs e)
         {
-            MoveToTheOtherList(userListBox.SelectedItem, userList, adminList, adminListBox);            
+            MoveToTheOtherList(userListBox.SelectedItem, userList, adminList, adminListBox);
         }
 
         private void MoveToTheOtherList(Object user, List<User> currentList, List<User> newList, ListBox newListBox)
@@ -262,6 +275,7 @@ namespace Labb_5
             EnableMoveAdminToUserButton();
             deleteUserButton.IsEnabled = true;
             changeUserButton.IsEnabled = true;
+            addUserButton.IsEnabled = true;
             foreach (var user in adminList)
             {
                 if (user == adminListBox.SelectedItem)
