@@ -255,17 +255,24 @@ namespace Labb_5
 
         private void MoveToTheOtherList(Object user, List<User> currentList, List<User> newList, ListBox newListBox)
         {
-            for (int i = 0; i < currentList.Count; i++)
+            MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change status for the following user?\n\n" +
+                                      $"{userInfoLabel.Content}",
+                                      "Change status",
+                                      MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer == MessageBoxResult.Yes)
             {
-                if (currentList[i] == user)
+                for (int i = 0; i < currentList.Count; i++)
                 {
-                    newList.Add(currentList[i]);
-                    newListBox.ItemsSource = newList;
-                    currentList.RemoveAt(i);
-                    moveAdminToUser.IsEnabled = false;
-                    moveUserToAdmin.IsEnabled = false;
-                    userListBox.Items.Refresh();
-                    adminListBox.Items.Refresh();
+                    if (currentList[i] == user)
+                    {
+                        newList.Add(currentList[i]);
+                        newListBox.ItemsSource = newList;
+                        currentList.RemoveAt(i);
+                        moveAdminToUser.IsEnabled = false;
+                        moveUserToAdmin.IsEnabled = false;
+                        userListBox.Items.Refresh();
+                        adminListBox.Items.Refresh();
+                    }
                 }
             }
         }
