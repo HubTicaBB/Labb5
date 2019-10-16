@@ -204,21 +204,33 @@ namespace Labb_5
 
         private void deleteUserButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult answer = MessageBox.Show($"Are you sure you want to delete the following user from  the User List?\n\n" +
-              $"{userInfoLabel.Content}",
-              "Delete user",
-              MessageBoxButton.YesNo, MessageBoxImage.Question);
+            MessageBoxResult answer = MessageBox.Show($"Are you sure you want to delete the following user from  the list?\n\n" +
+                                      $"{userInfoLabel.Content}",
+                                      "Delete user",
+                                      MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer == MessageBoxResult.Yes)
             {
-                for (int i = 0; i < userList.Count; i++)
+                if (userListBox.SelectedItem != null)
                 {
-                    if (userList[i] == userListBox.SelectedItem)
-                    {
-                        userList.Remove(userList[i]);
-                        userInfoLabel.Content = null;
-                        userListBox.ItemsSource = userList;
-                        userListBox.Items.Refresh();
-                    }
+                    DeleteUser(userList, userListBox);
+                }
+                else if (adminListBox.SelectedItem != null)
+                {
+                    DeleteUser(adminList, adminListBox);
+                }
+            }
+        }
+
+        private void DeleteUser(List<User> list, ListBox listBox)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == listBox.SelectedItem)
+                {
+                    list.Remove(list[i]);
+                    userInfoLabel.Content = null;
+                    listBox.ItemsSource = list;
+                    listBox.Items.Refresh();
                 }
             }
         }
@@ -248,6 +260,8 @@ namespace Labb_5
         private void adminListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EnableMoveAdminToUserButton();
+            deleteUserButton.IsEnabled = true;
+            changeUserButton.IsEnabled = true;
             foreach (var user in adminList)
             {
                 if (user == adminListBox.SelectedItem)
