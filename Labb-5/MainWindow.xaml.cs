@@ -67,7 +67,7 @@ namespace Labb_5
 
         private bool NameIsValid()
         {
-            if (Regex.IsMatch(nameBox.Text, @"^([a-zA-ZÄäÖöÅå]{2,}\s[a-zA-zÄäÖöÅå]{1,}'?-?[a-zA-ZÄäÖöÅå]{2,}\s?([a-zA-ZÄäÖöÅå]{1,})?)"))
+            if (Regex.IsMatch(nameBox.Text, @"^([a-zA-ZÄäÖöÅå]{1,}\s[a-zA-zÄäÖöÅå]{1,}'?-?[a-zA-ZÄäÖöÅå]{1,}\s?([a-zA-ZÄäÖöÅå]{1,})?)"))
             {
                 return true;
             }
