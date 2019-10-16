@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -71,27 +69,40 @@ namespace Labb_5
         {
             if (Regex.IsMatch(nameBox.Text, @"^([a-zA-ZÄäÖöÅå]{2,}\s[a-zA-zÄäÖöÅå]{1,}'?-?[a-zA-ZÄäÖöÅå]{2,}\s?([a-zA-ZÄäÖöÅå]{1,})?)"))
             {
-                return true;                
+                return true;
             }
             else
             {
                 MessageBox.Show($"The user name you entered is not valid.\n" +
-                                $"Please enter first and last name", 
+                                $"Please enter first and last name",
                                 "Invalid user name", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 nameBox.Text = "";
                 nameBox.Focus();
                 return false;
-            }            
+            }
         }
 
-        private bool IsEmailValid()
+
+        private bool EmailIsValid()
         {
-            return true;
+            if (Regex.IsMatch(emailBox.Text, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"))
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show($"The e-mail address you entered is not valid.\n" +
+                                $"Please try again.",
+                                "Invalid e-mail address", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                emailBox.Text = "";
+                emailBox.Focus();
+                return false;
+            }
         }
-
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NameIsValid() && IsEmailValid())
+
+            if (NameIsValid() && EmailIsValid())
             {
                 MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
                            $"    {"Name: ",-10}{nameBox.Text}\n" +
@@ -107,7 +118,7 @@ namespace Labb_5
                 }
                 nameBox.Text = "";
                 emailBox.Text = "";
-            }            
+            }
         }
 
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -127,8 +138,9 @@ namespace Labb_5
         }
 
         private void changeUserButton_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             deleteUserButton.IsEnabled = false;
+            moveUserToAdmin.IsEnabled = false;
             nameLabel.Content = "New Name";
             eMailLabel.Content = "New E-mail";
 
