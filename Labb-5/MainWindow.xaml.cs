@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,22 +67,47 @@ namespace Labb_5
             }
         }
 
+        private bool NameIsValid()
+        {
+            if (Regex.IsMatch(nameBox.Text, @"^([a-zA-ZÄäÖöÅå]{2,}\s[a-zA-zÄäÖöÅå]{1,}'?-?[a-zA-ZÄäÖöÅå]{2,}\s?([a-zA-ZÄäÖöÅå]{1,})?)"))
+            {
+                return true;                
+            }
+            else
+            {
+                MessageBox.Show($"The user name you entered is not valid.\n" +
+                                $"Please enter first and last name", 
+                                "Invalid user name", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                nameBox.Text = "";
+                nameBox.Focus();
+                return false;
+            }            
+        }
+
+        private bool IsEmailValid()
+        {
+            return true;
+        }
+
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
-                            $"    {"Name: ",-10}{nameBox.Text}\n" +
-                            $"    {"E-Mail: ",-10}  {emailBox.Text}\n",
-                            "Add New User",
-                            MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (answer == MessageBoxResult.Yes)
+            if (NameIsValid() && IsEmailValid())
             {
-                User user = new User(nameBox.Text, emailBox.Text);
-                userList.Add(user);
-                userListBox.ItemsSource = userList;
-                userListBox.Items.Refresh();               
-            }
-            nameBox.Text = "";
-            emailBox.Text = "";
+                MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
+                           $"    {"Name: ",-10}{nameBox.Text}\n" +
+                           $"    {"E-Mail: ",-10}  {emailBox.Text}\n",
+                           "Add New User",
+                           MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (answer == MessageBoxResult.Yes)
+                {
+                    User user = new User(nameBox.Text, emailBox.Text);
+                    userList.Add(user);
+                    userListBox.ItemsSource = userList;
+                    userListBox.Items.Refresh();
+                }
+                nameBox.Text = "";
+                emailBox.Text = "";
+            }            
         }
 
         private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
