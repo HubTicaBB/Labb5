@@ -18,8 +18,8 @@ namespace Labb_5
         {
             InitializeComponent();
 
-            nameBox.TextChanged += OnNameBoxTextChanged;
-            emailBox.TextChanged += OnEmailBoxTextChanged;
+            nameBox.TextChanged += OnBothTextBoxesTextChanged;
+            emailBox.TextChanged += OnBothTextBoxesTextChanged;
             addUserButton.Click += OnAddButtonClicked;
             changeUserButton.Click += OnChangeButtonClicked;
             deleteUserButton.Click += OnDeleteButtonClicked;
@@ -54,19 +54,7 @@ namespace Labb_5
             moveAdminToUser.IsEnabled = adminListBox.SelectedItem != null;
         }
 
-        private void OnNameBoxTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null)
-            {
-                EnableAddButton();
-            }
-            else
-            {
-                EnableChangeButton();
-            }
-        }
-
-        private void OnEmailBoxTextChanged(object sender, TextChangedEventArgs e)
+        private void OnBothTextBoxesTextChanged(object sender, TextChangedEventArgs e)
         {
             if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null)
             {
