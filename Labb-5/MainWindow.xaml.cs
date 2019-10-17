@@ -253,6 +253,7 @@ namespace Labb_5
         private void moveUserToAdmin_Click(object sender, RoutedEventArgs e)
         {
             MoveToTheOtherList(userListBox.SelectedItem, userList, adminList, adminListBox);
+            userInfoLabel.Content = "";
         }
 
         private void MoveToTheOtherList(Object user, List<User> currentList, List<User> newList, ListBox newListBox)
@@ -299,6 +300,7 @@ namespace Labb_5
         private void moveAdminToUser_Click(object sender, RoutedEventArgs e)
         {
             MoveToTheOtherList(adminListBox.SelectedItem, adminList, userList, userListBox);
+            userInfoLabel.Content = "";
         }
     }
 }
