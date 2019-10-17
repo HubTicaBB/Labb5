@@ -13,6 +13,7 @@ namespace Labb_5
     {
         static List<User> userList = new List<User>();
         static List<User> adminList = new List<User>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace Labb_5
         {
             moveUserToAdmin.IsEnabled = userListBox.SelectedItem != null;
         }
+
         private void EnableMoveAdminToUserButton()
         {
             moveAdminToUser.IsEnabled = adminListBox.SelectedItem != null;
@@ -147,12 +149,14 @@ namespace Labb_5
             EnableDeleteButton();
             EnableMoveUserToAdminButton();
             addUserButton.IsEnabled = true;
-
-            foreach (var item in userList)
+            
+            foreach (var user in userList)
             {
-                if (item == userListBox.SelectedItem)
+                if (user == userListBox.SelectedItem)
                 {
-                    userInfoLabel.Content = $"User name\t {item.Name,30}\nE-Mail\t\t {item.Email,30}";
+                    userInfoLabel.Content = $"{"User name:",11}    {user.Name,-30}\n" +
+                                            $"{"E-Mail:",15}    {user.Email,-30}\n" +
+                                            $"{"Status:",15}    {"User",-30}";
                 }
             }
         }
@@ -199,7 +203,6 @@ namespace Labb_5
 
         private void EnterNewUserData(List<User> list, ListBox listBox)
         {
-
             foreach (var item in list)
             {
                 if (item == listBox.SelectedItem)
@@ -282,11 +285,13 @@ namespace Labb_5
             deleteUserButton.IsEnabled = true;
             changeUserButton.IsEnabled = true;
             addUserButton.IsEnabled = true;
-            foreach (var user in adminList)
+            foreach (var admin in adminList)
             {
-                if (user == adminListBox.SelectedItem)
+                if (admin == adminListBox.SelectedItem)
                 {
-                    userInfoLabel.Content = $"User name\t {user.Name,30}\nE-Mail\t\t {user.Email,30}";
+                    userInfoLabel.Content = $"{"User name:",11}    {admin.Name,-30}\n" +
+                                            $"{"E-Mail:",15}    {admin.Email,-30}\n" +
+                                            $"{"Status:",15}    {"Admin",-30}";
                 }
             }
         }
