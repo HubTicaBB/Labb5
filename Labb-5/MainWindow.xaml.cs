@@ -17,6 +17,16 @@ namespace Labb_5
         public MainWindow()
         {
             InitializeComponent();
+
+            nameBox.TextChanged += OnNameBoxTextChanged;
+            emailBox.TextChanged += OnEmailBoxTextChanged;
+            addUserButton.Click += OnAddButtonClicked;
+            changeUserButton.Click += OnChangeButtonClicked;
+            deleteUserButton.Click += OnDeleteButtonClicked;
+            moveUserToAdmin.Click += OnMoveUserToAdminClicked;
+            moveAdminToUser.Click += OnMoveAdminToUserClicked;
+            userListBox.SelectionChanged += OnUserListBoxSelected;
+            adminListBox.SelectionChanged += OnAdminListBoxSelected;
         }
 
         private void EnableAddButton()
@@ -44,9 +54,9 @@ namespace Labb_5
             moveAdminToUser.IsEnabled = adminListBox.SelectedItem != null;
         }
 
-        private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void OnNameBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null) /////
+            if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null)
             {
                 EnableAddButton();
             }
@@ -56,9 +66,9 @@ namespace Labb_5
             }
         }
 
-        private void emailBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void OnEmailBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null) //////
+            if (userListBox.SelectedItem == null && adminListBox.SelectedItem == null)
             {
                 EnableAddButton();
             }
@@ -122,13 +132,13 @@ namespace Labb_5
             return true;
         }
 
-        private void addUserButton_Click(object sender, RoutedEventArgs e)
+        private void OnAddButtonClicked(object sender, RoutedEventArgs e)
         {
             if (IsNameValid(nameBox.Text) && IsStringValidEmail(emailBox.Text) && EmailIsUnique())
             {
                 MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
-                           $"    {"Name: ",-10} {nameBox.Text}\n" +
-                           $"    {"E-Mail: ",-10}{emailBox.Text}\n",
+                           $"{"Name:",11}    {nameBox.Text}\n" +
+                           $"{"E-Mail:",12}    {emailBox.Text}\n",
                            "Add New User",
                            MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (answer == MessageBoxResult.Yes)
@@ -143,7 +153,7 @@ namespace Labb_5
             }
         }
 
-        private void userListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnUserListBoxSelected(object sender, SelectionChangedEventArgs e)
         {
             EnableChangeButton();
             EnableDeleteButton();
@@ -161,7 +171,7 @@ namespace Labb_5
             }
         }
 
-        private void changeUserButton_Click(object sender, RoutedEventArgs e)
+        private void OnChangeButtonClicked(object sender, RoutedEventArgs e)
         {
             deleteUserButton.IsEnabled = false;
             moveUserToAdmin.IsEnabled = false;
@@ -217,7 +227,7 @@ namespace Labb_5
             }
         }
 
-        private void deleteUserButton_Click(object sender, RoutedEventArgs e)
+        private void OnDeleteButtonClicked(object sender, RoutedEventArgs e)
         {
             MessageBoxResult answer = MessageBox.Show($"Are you sure you want to delete the following user from  the list?\n\n" +
                                       $"{userInfoLabel.Content}",
@@ -250,7 +260,7 @@ namespace Labb_5
             }
         }
 
-        private void moveUserToAdmin_Click(object sender, RoutedEventArgs e)
+        private void OnMoveUserToAdminClicked(object sender, RoutedEventArgs e)
         {
             MoveToTheOtherList(userListBox.SelectedItem, userList, adminList, adminListBox);
             userInfoLabel.Content = "";
@@ -280,7 +290,7 @@ namespace Labb_5
             }
         }
 
-        private void adminListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnAdminListBoxSelected(object sender, SelectionChangedEventArgs e)
         {
             EnableMoveAdminToUserButton();
             deleteUserButton.IsEnabled = true;
@@ -297,7 +307,7 @@ namespace Labb_5
             }
         }
 
-        private void moveAdminToUser_Click(object sender, RoutedEventArgs e)
+        private void OnMoveAdminToUserClicked(object sender, RoutedEventArgs e)
         {
             MoveToTheOtherList(adminListBox.SelectedItem, adminList, userList, userListBox);
             userInfoLabel.Content = "";
