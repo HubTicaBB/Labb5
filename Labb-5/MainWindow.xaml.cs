@@ -133,8 +133,7 @@ namespace Labb_5
                 {
                     User user = new User(nameBox.Text, emailBox.Text);
                     userList.Add(user);
-                    userListBox.ItemsSource = userList;
-                    userListBox.Items.Refresh();
+                    RefreshListBox(userListBox, userList);
                 }
                 nameBox.Text = "";
                 emailBox.Text = "";
@@ -209,8 +208,7 @@ namespace Labb_5
                     item.Email = emailBox.Text;
                     nameBox.Text = "";
                     emailBox.Text = "";
-                    listBox.ItemsSource = list;
-                    listBox.Items.Refresh();
+                    RefreshListBox(listBox, list);
                 }
             }
         }
@@ -242,8 +240,7 @@ namespace Labb_5
                 {
                     list.Remove(list[i]);
                     userInfoLabel.Content = null;
-                    listBox.ItemsSource = list;
-                    listBox.Items.Refresh();
+                    RefreshListBox(listBox, list);
                 }
             }
         }
@@ -299,6 +296,12 @@ namespace Labb_5
         {
             MoveToTheOtherList(adminListBox.SelectedItem, adminList, userList, userListBox);
             userInfoLabel.Content = "";
+        }
+
+        private void RefreshListBox(ListBox listBox, List<User> sourceList)
+        {
+            listBox.ItemsSource = sourceList;
+            listBox.Items.Refresh();
         }
     }
 }
