@@ -7,12 +7,18 @@
         mc:Ignorable="d"
         Title="User Database" Height="450" Width="982">
     <Grid>
-        <Grid Margin="0,0,22.5,0.5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="521*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="437*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="0,0,22,1" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="17*"/>
                 <ColumnDefinition Width="42*"/>
                 <ColumnDefinition Width="36*"/>
-                <ColumnDefinition Width="824*"/>
+                <ColumnDefinition Width="781*"/>
+                <ColumnDefinition Width="40*"/>
                 <ColumnDefinition Width="36*"/>
             </Grid.ColumnDefinitions>
             <Label HorizontalContentAlignment="Right" x:Name="nameLabel" Content="First and Last Name" HorizontalAlignment="Left" Margin="0,111,0,0" VerticalAlignment="Top" Width="146" Grid.ColumnSpan="3" Height="26" Grid.Column="1"/>
@@ -21,7 +27,7 @@
             <TextBox x:Name="emailBox" HorizontalAlignment="Left" Height="23" Margin="83,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Grid.Column="3" TextChanged="emailBox_TextChanged"/>
             <Label Content="User List:" Grid.Column="3" HorizontalAlignment="Left" Margin="300,66,0,0" VerticalAlignment="Top" Width="132" FontSize="20" FontWeight="Bold" Height="36" ToolTip="Click on user name to see complete information" ToolTipService.Placement="Top"/>
             <Label Content="Admin List:" Grid.Column="3" HorizontalAlignment="Left" Margin="437,66,0,0" VerticalAlignment="Top" Width="141" FontSize="20" FontWeight="Bold" Height="36" ToolTip="Click on admin name to see complete information" ToolTipService.Placement="Top"/>
-            <Label x:Name="userInfoLabel" HorizontalContentAlignment="Left"  Content="" Grid.Column="3" HorizontalAlignment="Left" Height="66" Margin="575,102,0,0" VerticalAlignment="Top" Width="274" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.ColumnSpan="2" />
+            <Label x:Name="userInfoLabel" HorizontalContentAlignment="Left"  Content="" Grid.Column="3" HorizontalAlignment="Left" Height="66" Margin="575,102,0,0" VerticalAlignment="Top" Width="274" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.ColumnSpan="3" />
             <Label Content="User Info:" Grid.Column="3" HorizontalAlignment="Left" Margin="574,66,0,0" VerticalAlignment="Top" Width="141" FontSize="20" FontWeight="Bold" Height="36" ToolTip="Complete information about selected user" ToolTipService.Placement="Top" />
             <ListBox x:Name="userListBox" Grid.Column="3" HorizontalAlignment="Left" Height="150" Margin="300,102,0,0" VerticalAlignment="Top" Width="132" SelectionChanged="userListBox_SelectionChanged"/>
             <ListBox x:Name="adminListBox" Grid.Column="3" HorizontalAlignment="Left" Height="150" Margin="437,102,0,0" VerticalAlignment="Top" Width="132" SelectionChanged="adminListBox_SelectionChanged"/>

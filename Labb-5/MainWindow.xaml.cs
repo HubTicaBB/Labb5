@@ -102,7 +102,7 @@ namespace Labb_5
             }
         }
 
-        private bool EmailIsUnique()
+        private bool EmailIsUnique(string text)
         {
             List<User> allUsers = new List<User>();
             allUsers.AddRange(userList);
@@ -110,9 +110,9 @@ namespace Labb_5
 
             foreach (var user in allUsers)
             {
-                if (user.Email == emailBox.Text)
+                if (user.Email == text)
                 {
-                    MessageBox.Show($"E-Mail address \"{emailBox.Text}\" already registered.\nChoose another E-Mail address.", "E-Mail already in use",
+                    MessageBox.Show($"E-Mail address \"{text}\" already registered.\nChoose another E-Mail address.", "E-Mail already in use",
                                     MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     emailBox.Text = "";
                     emailBox.Focus();
@@ -122,9 +122,29 @@ namespace Labb_5
             return true;
         }
 
+        //private bool EmailIsUnique()
+        //{
+        //    List<User> allUsers = new List<User>();
+        //    allUsers.AddRange(userList);
+        //    allUsers.AddRange(adminList);
+
+        //    foreach (var user in allUsers)
+        //    {
+        //        if (user.Email == emailBox.Text)
+        //        {
+        //            MessageBox.Show($"E-Mail address \"{emailBox.Text}\" already registered.\nChoose another E-Mail address.", "E-Mail already in use",
+        //                            MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        //            emailBox.Text = "";
+        //            emailBox.Focus();
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+
         private void addUserButton_Click(object sender, RoutedEventArgs e)
         {
-            if (IsNameValid(nameBox.Text) && IsStringValidEmail(emailBox.Text) && EmailIsUnique())
+            if (IsNameValid(nameBox.Text) && IsStringValidEmail(emailBox.Text) && EmailIsUnique(emailBox.Text))
             {
                 MessageBoxResult answer = MessageBox.Show($"Are you sure you want to add the following user to the User List?\n\n" +
                            $"    {"Name: ",-10} {nameBox.Text}\n" +
@@ -149,7 +169,7 @@ namespace Labb_5
             EnableDeleteButton();
             EnableMoveUserToAdminButton();
             addUserButton.IsEnabled = true;
-            
+
             foreach (var user in userList)
             {
                 if (user == userListBox.SelectedItem)
@@ -172,7 +192,7 @@ namespace Labb_5
             eMailLabel.Content = "New E-mail";
             nameBox.ToolTip = "Enter new name";
             emailBox.ToolTip = "Enter new email";
-            if (nameBox.Text != "" && emailBox.Text != "" && IsStringValidEmail(emailBox.Text) && IsNameValid(nameBox.Text))
+            if (nameBox.Text != "" && emailBox.Text != "" && IsStringValidEmail(emailBox.Text) && IsNameValid(nameBox.Text) && EmailIsUnique(emailBox.Text))
             {
                 MessageBoxResult answer = MessageBox.Show($"Are you sure you want to change the following user?\n\n" +
                             $"{userInfoLabel.Content}",
