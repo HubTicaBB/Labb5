@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Labb_5"
         mc:Ignorable="d"
-        Title="User Database" Height="450" Width="982">
+        Title="User Database" MinHeight="450" MinWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="521*"/>

@@ -75,7 +75,7 @@ namespace Labb_5
             else
             {
                 MessageBox.Show($"The user name you entered is not valid.\n" +
-                                $"Please enter first and last name",
+                                $"Please enter first and last name.",
                                 "Invalid user name", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 nameBox.Text = "";
                 nameBox.Focus();
@@ -142,6 +142,7 @@ namespace Labb_5
 
         private void OnUserListBoxSelected(object sender, SelectionChangedEventArgs e)
         {
+            adminListBox.UnselectAll();
             EnableChangeButton();
             EnableDeleteButton();
             EnableMoveUserToAdminButton();
@@ -277,6 +278,7 @@ namespace Labb_5
 
         private void OnAdminListBoxSelected(object sender, SelectionChangedEventArgs e)
         {
+            userListBox.UnselectAll();
             EnableMoveAdminToUserButton();
             deleteUserButton.IsEnabled = true;
             changeUserButton.IsEnabled = true;
